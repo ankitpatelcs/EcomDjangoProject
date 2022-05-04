@@ -1,0 +1,37 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h4>Cart: {{cart.user}} {{cart.product.all.count}}</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th colspan="1">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr>
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.product.name}}</td>
+                <td>{{item.product.price}}</td>
+                <!-- <td> {{item.quantity}}</td> -->
+                <td>
+                    <span class="text-danger">{{item.quantity}}</span>
+
+                </td>
+                <td><a href="{% url 'delete-cart' item.id %}">Delete</a> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'checkout' %}"><button>Checkout</button></a>
+</div>
+
+{% endblock %}
